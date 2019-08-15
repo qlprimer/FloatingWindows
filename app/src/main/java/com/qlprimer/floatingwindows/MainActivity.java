@@ -26,24 +26,28 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        startService(new Intent(MainActivity.this, LoggingService.class));
         if(!Settings.canDrawOverlays(this)){
             Toast.makeText(this, "当前无权限，请授权", Toast.LENGTH_SHORT).show();
             startActivityForResult(new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, Uri.parse("package:" + getPackageName())), 0);
-        }else{
-            startService(new Intent(MainActivity.this, LoggingService.class));
-
         }
+
         button=findViewById(R.id.btn_log);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                new Thread(new RunableThread("thread1")).start();
+//                new Thread(new RunableThread("thread1")).start();
 //                new Thread(new RunableThread("thread2")).start();
 //                new Thread(new RunableThread("thread3")).start();
 //                new Thread(new RunableThread("thread4")).start();
 
-
+                ConsoleLogger.i(TAG," this is infomation!"+ DateTimeUtil.dateToStr(new Date()));
+                ConsoleLogger.e(TAG," this is error!"+ DateTimeUtil.dateToStr(new Date()));
+                ConsoleLogger.d(TAG," this is debug!"+DateTimeUtil.dateToStr(new Date()));
+                ConsoleLogger.v(TAG," This is VERBOSE!"+DateTimeUtil.dateToStr(new Date()));
+                ConsoleLogger.w(TAG," this is warn!"+DateTimeUtil.dateToStr(new Date()));
+                ConsoleLogger.wtf(TAG," this is WTF!"+DateTimeUtil.dateToStr(new Date()));
 
             }
         });
@@ -66,6 +70,7 @@ public class MainActivity extends AppCompatActivity {
                 ConsoleLogger.v(TAG,"T:"+mname+" This is VERBOSE!"+DateTimeUtil.dateToStr(new Date()));
                 ConsoleLogger.w(TAG,"T:"+mname+" this is warn!"+DateTimeUtil.dateToStr(new Date()));
                 ConsoleLogger.wtf(TAG,"T:"+mname+" this is WTF!"+DateTimeUtil.dateToStr(new Date()));
+                ConsoleLogger.e(TAG,new Throwable());
                 try {
                     Thread.sleep(r.nextInt(1000));
                 } catch (InterruptedException e) {

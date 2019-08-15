@@ -16,11 +16,7 @@ android {
         }
     }
 }
-repositories {
-    flatDir {
-        dirs project(':consolelog').file('libs')
-    }
-}
+
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'androidx.appcompat:appcompat:1.0.2'

@@ -21,6 +21,7 @@ import com.qlprimer.consolelog.entity.SizeEntity;
 import com.qlprimer.consolelog.handler.GlobalHandler;
 import com.qlprimer.consolelog.utils.SuspensionCache;
 
+import static com.qlprimer.consolelog.core.ConsoleController.clear;
 import static com.qlprimer.consolelog.core.ConsoleController.parseSpan;
 
 public class ConsoleLogSuspend extends BaseSuspend implements GlobalHandler.HandleMessageListener {
@@ -123,7 +124,8 @@ public class ConsoleLogSuspend extends BaseSuspend implements GlobalHandler.Hand
         cleanImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                console_textview.setText("");
+
+                console_textview.setText(clear());
             }
         });
     }
@@ -148,7 +150,6 @@ public class ConsoleLogSuspend extends BaseSuspend implements GlobalHandler.Hand
         synchronized (this){
             console_textview.setText(parseSpan(msg));
         }
-
 
         int downoffset=offset-console_textview.getHeight();
         if(downoffset>0){

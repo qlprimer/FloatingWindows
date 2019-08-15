@@ -29,7 +29,7 @@ public class ConsoleController {
     private static final int COLOR_WTF =  Integer.valueOf(0xffff5540);
     private static final int COLOR_CONSOLE=  Integer.valueOf(0xF0F8FF);
 
-    public static String parseSpan(Message message){
+    public static StringBuffer parseSpan(Message message){
         String type=message.peekData().getString("type");
         String tag=message.peekData().getString("tag");
         String msg=message.peekData().getString("msg");
@@ -63,7 +63,7 @@ public class ConsoleController {
         }
 
         ensureOutMaxBuffer();
-        return buffer.toString();
+        return buffer;
     }
 
     private static void log_I(String tag,String msg){
@@ -202,9 +202,10 @@ public class ConsoleController {
 
 
 
-    private static void clear(){
+
+    public static StringBuffer clear(){
 //        builder.delete(0,builder.length());
-        buffer.delete(0,buffer.length());
+        return buffer.delete(0,buffer.length());
     }
 
     private static void ensureOutMaxBuffer(){
