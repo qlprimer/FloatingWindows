@@ -1,6 +1,8 @@
 # FloatingWindows
 简易的悬浮窗控制台输出控件
 
+<img src=https://github.com/qlprimer/FloatingWindows/blob/master/images/Screenshot_2019-08-15-13-10-28-468_com.qlprimer.floatingwindows.png width=360 height=640/>
+
 ## 使用说明
 ### 一：添加依赖
 ####  (1).首先下载aar放入app-libs
