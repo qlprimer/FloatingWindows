@@ -17,11 +17,11 @@
     implementation(name:'consolelog-release',ext:'aar')
 
 ### 二：在activity中检查权限并开启服务
-    startService(new Intent(MainActivity.this, LoggingService.class));
-        if(!Settings.canDrawOverlays(this)){
+      startService(new Intent(MainActivity.this, LoggingService.class));
+      if(!Settings.canDrawOverlays(this)){
             Toast.makeText(this, "当前无权限，请授权", Toast.LENGTH_SHORT).show();
             startActivityForResult(new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, Uri.parse("package:" + getPackageName())), 0);
-        }
+      }
 ### 三：使用
                 ConsoleLogger.i(TAG,"T:"+mname+" this is infomation!"+ DateTimeUtil.dateToStr(new Date()));
                 ConsoleLogger.e(TAG,"T:"+mname+" this is error!"+ DateTimeUtil.dateToStr(new Date()));
