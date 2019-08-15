@@ -2,7 +2,19 @@
 简易的悬浮窗控制台输出控件
 
 ## 使用说明
-### 一：在activity中检查权限并开启服务
+### 一：添加依赖
+####  (1).首先下载aar放入app-libs
+####  (2).app->build.gradle添加如下代码
+      repositories  {
+       flatDir {
+           dirs 'libs'
+       }
+      }
+####  (3).在dependencies中添加（consolelog-release根据aar文件名而定，由于使用了joda的时间处理类所以需要在项目中加入该时间引用类）：
+    implementation "net.danlew:android.joda:2.10.2"
+    implementation(name:'consolelog-release',ext:'aar')
+
+### 二：在activity中检查权限并开启服务
    
       if(!Settings.canDrawOverlays(this)){
             Toast.makeText(this, "当前无权限，请授权", Toast.LENGTH_SHORT).show();
@@ -11,7 +23,7 @@
             startService(new Intent(MainActivity.this, LoggingService.class));
 
         }
-### 二：使用
+### 三：使用
                 ConsoleLogger.i(TAG,"T:"+mname+" this is infomation!"+ DateTimeUtil.dateToStr(new Date()));
                 ConsoleLogger.e(TAG,"T:"+mname+" this is error!"+ DateTimeUtil.dateToStr(new Date()));
                 ConsoleLogger.d(TAG,"T:"+mname+" this is debug!"+DateTimeUtil.dateToStr(new Date()));
